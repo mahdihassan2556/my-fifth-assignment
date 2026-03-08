@@ -33,7 +33,8 @@ const displayAllIssue = (issues) => {
         }
         const newDiv = document.createElement("div")
         newDiv.innerHTML = `
- <div class="p-5 space-y-3  shadow-md rounded-md border-t-3 ${borderColor} h-full" id="div-card">
+             <div onclick="openModal(${issue.id})"
+               class="p-5 space-y-3  shadow-md rounded-md border-t-3 ${borderColor} h-full" id="div-card">
                 <div class="flex justify-between">
                     <img src="${statusIcon}" alt="" class="w-6 h-6 items-center">
                     <p class="text-[#EF4444] bg-[#FEECEC] py-1 px-6 rounded-2xl">${issue.priority}</p>
@@ -41,8 +42,8 @@ const displayAllIssue = (issues) => {
                 <p class="font-bold text-xl">${issue.title}</p>
                 <p class="text-[#64748B]">${issue.description}</p>
                 <div class="flex gap-1 border-b-2 border-gray-300 pb-4">
-                    <p class="text-[#EF4444] bg-[#FEECEC] py-1 px-3 rounded-2xl">${issue.labels[0]}</p>
-                    <p class="text-[#D97706] bg-[#FFF8DB] py-1 px-3 rounded-2xl">${issue.labels[1]}</p>
+                    <p class="text-[#EF4444] bg-[#FEECEC] py-1 px-3 rounded-2xl font-semibold">${issue.labels[0]}</p>
+                    <p class="text-[#D97706] bg-[#FFF8DB] py-1 px-3 rounded-2xl font-semibold">${issue.labels[1]}</p>
                 </div>
                 <p class="text-[#64748B]">${issue.author} </p>
                 <p class="text-[#64748B]">${issue.createdAt}</p>
@@ -51,9 +52,80 @@ const displayAllIssue = (issues) => {
         cardContainer.append(newDiv);
     };
 };
+// "status": "success",
+//   "message": "Issue fetched successfully",
+//   "data": {
+//     "id": 1,
+//     "title": "Fix navigation menu on mobile devices",
+//     "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
+//     "status": "open",
+//     "labels": [
+//       "bug",
+//       "help wanted"
+//     ],
+//     "priority": "high",
+//     "author": "john_doe",
+//     "assignee": "jane_smith",
+//     "createdAt": "2024-01-15T10:30:00Z",
+//     "updatedAt": "2024-01-15T10:30:00Z"
+const openModal = async (id) => {
+     const url =` https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+     
+     const res =await fetch(url);
+     const details = await res.json();
+    displayWordDetails(details.data);
+    };
+
+    const displayWordDetails = (word) => {
+        
+        const detailBox = document.getElementById("details-container");
+
+        detailBox.innerHTML =`
+       
+   <h1 class="text-xl font-bold">${word.title}</h1>
+   <div class="flex gap-3 items-center">
+     <p class="px-2 bg-green-500 rounded-2xl">${word.status}</p>
+     <p class=" flex items-center gap-2"> <i class="fa-solid fa-circle small"></i>Opened by ${word.author}</p>
+     <p class=" flex items-center gap-2"><i class="fa-solid fa-circle small"></i>${word.createdAt}</p>
+   </div>
+   <div class="flex gap-2 items-center">
+    <p class="text-[#EF4444] bg-[#FECACA] px-3  rounded-2xl font-semibold">${word.labels[0]}</p>
+    <p class="text-[#D97706] bg-[#FDE68A] px-2  rounded-2xl font-semibold">${word.labels[1]}</p>
+   </div>
+   <p class="text-[#64748B]">${word.description}</p>
+   <div class=" grid grid-cols-2 ">
+    <div class="">
+    <p>Assignee:</p>
+     <p class="font-bold">${word.assignee}</p>
+    
+   </div>
+      <div class="">
+     <p>Priority:</p>
+      <p class="w-17 text-center px-2 rounded-2xl bg-[#EF4444]">${word.priority}</p>
+   </div>
+ 
+   </div>
+ 
+   </div>
+    <div class="modal-action">
+      <form method="dialog">
+       
+        <button class="btn">Close</button>
+      </form>
+    </div>
+ `;
+        document.getElementById("issue_modal").showModal();
+    }
+    
+  
+   
+    
+
+
 const allBtn = document.getElementById("all-btn");
 const openBtn = document.getElementById("open-btn");
 const closedBtn = document.getElementById("closed-btn");
+    
 
 
 allBtn.addEventListener("click", () => {

@@ -13,6 +13,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .open{
+            color: #00A96E;
+            font-size: 15px;
+        }
+        .close{
+            color: #A855F7;
+            font-size: 15px;
+        }
+        .small{
+            font-size: 6px;
+            color: grey;
+           
+        }
+    </style>
 </head>
 
 <body>
@@ -57,16 +74,24 @@
                     </div>
                 </div>
                 <div class="flex gap-3 items-center">
-                    <p>Open</p>
-                    <p>Closed</p>
+                    <p> <i class="fa-solid fa-circle open"></i>   Open</p>
+                    <p> <i class="fa-solid fa-circle close"></i>   Closed</p>
                 </div>
             </div>
         </section>
 
         <section id="card-container" class="grid grid-cols-4 gap-3 shadow-md">
-          
+
         </section>
     </main>
+
+
+    <dialog id="issue_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box space-y-4" id="details-container">
+
+        </div>
+    </dialog>
+
 
     <script src="style.js/script.js"></script>
 </body>
