@@ -34,7 +34,7 @@ const displayAllIssue = (issues) => {
         const newDiv = document.createElement("div")
         newDiv.innerHTML = `
              <div onclick="openModal(${issue.id})"
-               class="p-5 space-y-3  shadow-md rounded-md border-t-3 ${borderColor} h-full" id="div-card">
+               class="p-5 space-y-3  shadow-md rounded-md border-t-3 ${borderColor} h-full card" id="div-card">
                 <div class="flex justify-between">
                     <img src="${statusIcon}" alt="" class="w-6 h-6 items-center">
                     <p class="text-[#EF4444] bg-[#FEECEC] py-1 px-6 rounded-2xl">${issue.priority}</p>
@@ -52,22 +52,23 @@ const displayAllIssue = (issues) => {
         cardContainer.append(newDiv);
     };
 };
-// "status": "success",
-//   "message": "Issue fetched successfully",
-//   "data": {
-//     "id": 1,
-//     "title": "Fix navigation menu on mobile devices",
-//     "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
-//     "status": "open",
-//     "labels": [
-//       "bug",
-//       "help wanted"
-//     ],
-//     "priority": "high",
-//     "author": "john_doe",
-//     "assignee": "jane_smith",
-//     "createdAt": "2024-01-15T10:30:00Z",
-//     "updatedAt": "2024-01-15T10:30:00Z"
+
+document.getElementById("btn-search").addEventListener("click", () => {
+    const input = document.getElementById("input-search");
+    const searchValue = input.value.trim().toLowerCase();
+    console.log(searchValue)
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}
+`)
+.then(res => res.json())
+.then(data =>{
+    const allWords = data.data;
+    const filterWords =allWords.filter(word => word.title.toLowerCase().includes(searchValue))
+   displayAllIssue(filterWords);
+});
+});
+
+
+
 const openModal = async (id) => {
      const url =` https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
      
