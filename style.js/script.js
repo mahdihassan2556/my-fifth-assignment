@@ -6,6 +6,7 @@ const allIssues = () => {
         .then(res => res.json())
         .then((json) =>{
             allIssuesData = json.data;
+            document.getElementById("issues-count").innerText = allIssuesData.length + " Issues";
              displayAllIssue(allIssuesData)});
 };
 
@@ -131,14 +132,15 @@ const closedBtn = document.getElementById("closed-btn");
 
 allBtn.addEventListener("click", () => {
 displayAllIssue(allIssuesData);
+ document.getElementById("issues-count").innerText = allIssuesData.length + " Issues";
 setActive(allBtn)
 });
 
 
 openBtn.addEventListener("click", () => {
-
+    
     const openIssues = allIssuesData.filter(issue => issue.status === "open");
-
+  document.getElementById("issues-count").innerText =openIssues.length + " Issues";
     displayAllIssue(openIssues)
     setActive(openBtn)
 });
@@ -147,7 +149,7 @@ openBtn.addEventListener("click", () => {
 closedBtn.addEventListener("click", () => {
      
     const closedIssues = allIssuesData.filter(issue =>issue.status === "closed");
-
+     document.getElementById("issues-count").innerText =closedIssues.length + " Issues";
     displayAllIssue(closedIssues)
     setActive(closedBtn)
 })
@@ -161,7 +163,7 @@ function setActive (button){
   button.classList.add("bg-blue-500","text-white");
 }
 
-displayAllIssue(allIssuesData);
+
 setActive(allBtn);
 
 allIssues();
