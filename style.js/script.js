@@ -32,6 +32,7 @@ const displayAllIssue = (issues) => {
         } else {
             borderColor = "border-[#A855F7]"
         }
+       
         const newDiv = document.createElement("div")
         newDiv.innerHTML = `
              <div onclick="openModal(${issue.id})"
@@ -42,9 +43,9 @@ const displayAllIssue = (issues) => {
                 </div>
                 <p class="font-bold text-xl">${issue.title}</p>
                 <p class="text-[#64748B]">${issue.description}</p>
-                <div class="flex gap-1 border-b-2 border-gray-300 pb-4">
-                    <p class="text-[#EF4444] bg-[#FEECEC] py-1 px-3 rounded-2xl font-semibold">${issue.labels[0]}</p>
-                    <p class="text-[#D97706] bg-[#FFF8DB] py-1 px-3 rounded-2xl font-semibold">${issue.labels[1]}</p>
+                <div class="flex gap-1 border-b-2 border-gray-300 ">
+                    <p class="text-[#EF4444] bg-[#FEECEC]  px-3 rounded-2xl font-semibold uppercase mb-4">${issue.labels[0]}</p>
+                    <p class="text-[#D97706] bg-[#FFF8DB] px-3 rounded-2xl font-semibold uppercase mb-4">${issue.labels[1]}</p>
                 </div>
                 <p class="text-[#64748B]">${issue.author} </p>
                 <p class="text-[#64748B]">${issue.createdAt}</p>
@@ -86,7 +87,7 @@ const openModal = async (id) => {
        
    <h1 class="text-xl font-bold">${word.title}</h1>
    <div class="flex gap-3 items-center">
-     <p class="px-2 bg-green-500 rounded-2xl">${word.status}</p>
+     <p class="px-2 bg-green-500 rounded-2xl text-white">${word.status}</p>
      <p class=" flex items-center gap-2"> <i class="fa-solid fa-circle small"></i>Opened by ${word.author}</p>
      <p class=" flex items-center gap-2"><i class="fa-solid fa-circle small"></i>${word.createdAt}</p>
    </div>
@@ -95,7 +96,7 @@ const openModal = async (id) => {
     <p class="text-[#D97706] bg-[#FDE68A] px-2  rounded-2xl font-semibold">${word.labels[1]}</p>
    </div>
    <p class="text-[#64748B]">${word.description}</p>
-   <div class=" grid grid-cols-2 ">
+   <div class=" grid grid-cols-2 bg-slate-100 p-5 rounded-md">
     <div class="">
     <p>Assignee:</p>
      <p class="font-bold">${word.assignee}</p>
@@ -103,7 +104,7 @@ const openModal = async (id) => {
    </div>
       <div class="">
      <p>Priority:</p>
-      <p class="w-17 text-center px-2 rounded-2xl bg-[#EF4444]">${word.priority}</p>
+      <p class="w-17 text-center px-2 rounded-2xl bg-[#EF4444] text-white">${word.priority}</p>
    </div>
  
    </div>
@@ -112,7 +113,7 @@ const openModal = async (id) => {
     <div class="modal-action">
       <form method="dialog">
        
-        <button class="btn">Close</button>
+        <button class="btn btn-primary outline-none">Close</button>
       </form>
     </div>
  `;
